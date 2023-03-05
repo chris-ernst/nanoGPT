@@ -85,5 +85,15 @@ with torch.no_grad():
     with ctx:
         for k in range(num_samples):
             y = model.generate(x, max_new_tokens, temperature=temperature, top_k=top_k)
-            print(decode(y[0].tolist()))
+            output_text = decode(y[0].tolist())
+
+            f = open("output_text.txt", "a")
+            f.write(output_text)
+            f.close()
+
+            #open and read the file after the appending:
+            f = open("output_text.txt", "r")
+            print(f.read())
+            
+#            print(decode(y[0].tolist()))
             print('---------------')
